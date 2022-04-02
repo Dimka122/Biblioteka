@@ -10,22 +10,11 @@ using System.Windows.Forms;
 
 namespace Biblioteka
 {
-    public partial class Form1 : Form
+    public partial class Form2 : Form
     {
-        public Form1()
+        public Form2()
         {
             InitializeComponent();
-        }
-
-        private void button4_Click(object sender, EventArgs e)
-        {
-            Close();
-        }
-
-        private void button3_Click(object sender, EventArgs e)
-        {
-            Form2 s =new Form2();
-            s.Show();
         }
     }
 }
