@@ -38,15 +38,18 @@
             // 
             // pictureBox1
             // 
+            this.pictureBox1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
+            this.pictureBox1.Image = global::Biblioteka.Properties.Resources.polka;
             this.pictureBox1.Location = new System.Drawing.Point(1, 1);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(633, 267);
+            this.pictureBox1.Size = new System.Drawing.Size(600, 300);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(1, 276);
+            this.button1.Location = new System.Drawing.Point(12, 207);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(103, 23);
             this.button1.TabIndex = 1;
@@ -55,16 +58,16 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(175, 276);
+            this.button2.Location = new System.Drawing.Point(12, 258);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(91, 23);
+            this.button2.Size = new System.Drawing.Size(103, 23);
             this.button2.TabIndex = 2;
             this.button2.Text = "добавить книгу";
             this.button2.UseVisualStyleBackColor = true;
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(364, 276);
+            this.button3.Location = new System.Drawing.Point(481, 207);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(96, 23);
             this.button3.TabIndex = 3;
@@ -73,7 +76,7 @@
             // 
             // button4
             // 
-            this.button4.Location = new System.Drawing.Point(541, 276);
+            this.button4.Location = new System.Drawing.Point(484, 258);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(93, 23);
             this.button4.TabIndex = 4;
