@@ -150,6 +150,7 @@ namespace Biblioteka
 
         private void trackBar1_Scroll(object sender, EventArgs e)
         {
+            value = 1;
             value = trackBar1.Value * 10;
         }
 
