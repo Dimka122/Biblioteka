@@ -52,7 +52,7 @@ namespace Biblioteka
         //    textBox1.Text = "";
         //}
 
-        private void button3_Click(object sender, EventArgs e)
+    private void button3_Click(object sender, EventArgs e)
         {
             //if (!textBox1.Text.Equals(String.Empty))
             //{
@@ -110,13 +110,13 @@ namespace Biblioteka
                 textBox1.Text = D.ReadToEnd();
                 D.Close();
             }
-            catch (System.IO.FileNotFoundException A)
+            catch (System.IO.FileNotFoundException D)
             {
-                MessageBox.Show(A.Message + "нема файла", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                MessageBox.Show(D.Message + "нема файла", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             }
-            catch (System.IO.IOException A)
+            catch (System.IO.IOException D)
             {
-                MessageBox.Show(A.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                MessageBox.Show(D.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             }
         }
 
@@ -127,10 +127,10 @@ namespace Biblioteka
             {
                 try
                 {
-                    var D=new System.IO.StreamWriter(saveFileDialog1.FileName,false,System.Text.Encoding.GetEncoding("UTF-8"));
+                    var A=new System.IO.StreamWriter(saveFileDialog1.FileName,false,System.Text.Encoding.GetEncoding("UTF-8"));
 
-                    D.Write(textBox1.Text);
-                    D.Close();
+                    A.Write(textBox1.Text);
+                    A.Close();
                 }
 
 
