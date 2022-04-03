@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.IO;
 
 namespace Biblioteka
 {
@@ -26,6 +27,11 @@ namespace Biblioteka
         {
             Form2 s =new Form2();
             s.Show();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
