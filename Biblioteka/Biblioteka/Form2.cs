@@ -6,20 +6,36 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Speech.Synthesis;
 using System.Windows.Forms;
+using System.Media;
+using static Biblioteka.Class1;
 
 namespace Biblioteka
 {
     public partial class Form2 : Form
     {
+        static SpeechSynthesizer synth;
+        C_Singelton s1 = C_Singelton.GetInstance();
         public Form2()
         {
             InitializeComponent();
+            synth = new SpeechSynthesizer();
+            synth.SetOutputToDefaultAudioDevice();
+            synth.SpeakCompleted += Synth_SpeakCompleted;
         }
+        private void Synth_SpeakCompleted(object sender, SpeakCompletedEventArgs e)
+        {
+            MessageBox.Show("Speech end", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
 
         private void button3_Click(object sender, EventArgs e)
         {
-
+            if (!textBox1.Text.Equals(String.Empty))
+            {
+                synth.Speak(textBox1.Text);
+            }
         }
 
         private void button1_Click(object sender, EventArgs e)
