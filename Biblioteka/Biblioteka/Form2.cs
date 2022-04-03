@@ -10,6 +10,8 @@ using System.Speech.Synthesis;
 using System.Windows.Forms;
 using System.Media;
 using static Biblioteka.Class1;
+using System.Threading;
+using System.IO;
 
 namespace Biblioteka
 {
@@ -17,6 +19,8 @@ namespace Biblioteka
     {
         static SpeechSynthesizer synth;
         C_Singelton s1 = C_Singelton.GetInstance();
+        private int value = 100;
+        //private int rate;
         public Form2()
         {
             InitializeComponent();
@@ -24,33 +28,91 @@ namespace Biblioteka
             synth.SetOutputToDefaultAudioDevice();
             synth.SpeakCompleted += Synth_SpeakCompleted;
         }
-        private void Synth_SpeakCompleted(object sender, SpeakCompletedEventArgs e)
+        private void ReadlocalFile()
         {
-            MessageBox.Show("Speech end", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
-        }
+            var open = new OpenFileDialog();
 
+            open.ShowDialog();
+
+            // Получить путь к файлу
+            string path = open.FileName;
+
+            if (path.Trim().Length == 0)
+            {
+
+                return;
+            }
+
+            var os = new StreamReader(path, Encoding.UTF8);
+            string str = os.ReadToEnd();
+            textBox1.Text = str;
+        }
+        //личное пустое пустое содержимое ToolStripMenuItem_Click(отправитель объекта, EventArgs e)
+        //{
+        //    textBox1.Text = "";
+        //}
 
         private void button3_Click(object sender, EventArgs e)
         {
-            if (!textBox1.Text.Equals(String.Empty))
+            //if (!textBox1.Text.Equals(String.Empty))
+            //{
+            //    synth.Speak(textBox1.Text);
+            //}
+            string text = textBox1.Text;
+
+            if (text.Trim().Length == 0)
             {
-                synth.Speak(textBox1.Text);
+                MessageBox.Show("Не удается прочитать пустой контент!","Сообщение об ошибке");
+                return;
             }
+
+            if (button3.Text == "Голос")
+            {
+
+                synth = new SpeechSynthesizer();
+
+                new Thread(Speak).Start();
+
+                button3.Text = "Остановить";
+
+            }
+            if(button3.Text == "Остановить")
+            {
+
+                synth.SpeakAsyncCancelAll(); // Прекратить чтение
+
+                button3.Text = "Голос";
+            }
+
+        }
+        private void Speak()
+        {
+
+            //synth.Rate = rate;
+            //speech.SelectVoice("Microsoft Lili "); // Установить диктор (китайский)
+            //speech.SelectVoice("Microsoft Anna "); // Английский
+            synth.Volume = value;
+            synth.SpeakAsync(textBox1.Text); // Метод чтения речи
+            synth.SpeakCompleted += Synth_SpeakCompleted; // Событие привязки
         }
 
+        private void Synth_SpeakCompleted(object sender, SpeakCompletedEventArgs e)
+        {
+            button3.Text = "Голос";
+        }
         private void button1_Click(object sender, EventArgs e)
         {
             openFileDialog1.ShowDialog(this);
             if (openFileDialog1.FileName == String.Empty) return;
             try
             {
-                var D=new System.IO.StreamReader(openFileDialog1.FileName,Encoding.GetEncoding("UTF-8"));
-                textBox1.Text=D.ReadToEnd();
+                var D = new System.IO.StreamReader(openFileDialog1.FileName, Encoding.GetEncoding("UTF-8"));
+                textBox1.Text = D.ReadToEnd();
                 D.Close();
             }
-            catch(System.IO.FileNotFoundException A)
+            catch (System.IO.FileNotFoundException A)
             {
-                MessageBox.Show(A.Message+"нема файла","Ошибка",MessageBoxButtons.OK,MessageBoxIcon.Exclamation);
+                MessageBox.Show(A.Message + "нема файла", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             }
             catch (System.IO.IOException A)
             {
@@ -84,6 +146,16 @@ namespace Biblioteka
             textBox1.Clear();
             openFileDialog1.Filter = "текстовые файлы(*.txt)|*.txt|All files(*.*)|*.*";
             saveFileDialog1.Filter = "текстовые файлы(*.txt)|*.txt|All files(*.*)|*.*";
+        }
+
+        private void trackBar1_Scroll(object sender, EventArgs e)
+        {
+            value = trackBar1.Value * 10;
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+            this.ReadlocalFile();
         }
     }
 }
